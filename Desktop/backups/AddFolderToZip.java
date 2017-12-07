@@ -1,22 +1,23 @@
 package tw.gov.nca.gss.common.util;
 
 import net.lingala.zip4j.core.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
 import net.lingala.zip4j.model.ZipParameters;
 import net.lingala.zip4j.util.Zip4jConstants;
 import tw.gov.nca.gss.common.GssBusinessException;
 import tw.gov.nca.gss.common.GssMessage;
 
-public class AddFolderToZip{
+public class AddFolderToZip {
 
 	public static void main(String[] args) {
 		new AddFolderToZip();
 	}
 
-	public AddFolderToZip() {
+	public AddFolderToZip() throws ZipException {
 		try {
 			ZipFile zipFile = new ZipFile("C:/Users/JamesHuang/Desktop/try.zip");
 			String folderToAdd = "C:/Users/JamesHuang/Desktop/backups";
-//			ZipFile zipFile = new ZipFile(path);
+			// ZipFile zipFile = new ZipFile(path);
 			ZipParameters parameters = new ZipParameters();
 			parameters.setCompressionMethod(Zip4jConstants.COMP_DEFLATE);
 			parameters.setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_NORMAL);
@@ -29,8 +30,8 @@ public class AddFolderToZip{
 			throw new GssBusinessException(GssMessage.G000AE, e);
 		}
 	}
-	
-	public AddFolderToZip(final String path, final String folderToAdd, final String pwd) {
+
+	public AddFolderToZip(final String path, final String folderToAdd, final String pwd) throws ZipException {
 		try {
 			ZipFile zipFile = new ZipFile(path);
 			ZipParameters parameters = new ZipParameters();
