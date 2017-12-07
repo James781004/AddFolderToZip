@@ -29,4 +29,20 @@ public class AddFolderToZip{
 			throw new GssBusinessException(GssMessage.G000AE, e);
 		}
 	}
+	
+	public AddFolderToZip(final String path, final String folderToAdd, final String pwd) {
+		try {
+			ZipFile zipFile = new ZipFile(path);
+			ZipParameters parameters = new ZipParameters();
+			parameters.setCompressionMethod(Zip4jConstants.COMP_DEFLATE);
+			parameters.setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_NORMAL);
+
+			parameters.setEncryptFiles(true);
+			parameters.setEncryptionMethod(Zip4jConstants.ENC_METHOD_STANDARD);
+			parameters.setPassword(pwd);
+			zipFile.addFolder(folderToAdd, parameters);
+		} catch (Exception e) {
+			throw new GssBusinessException(GssMessage.G000AE, e);
+		}
+	}
 }
